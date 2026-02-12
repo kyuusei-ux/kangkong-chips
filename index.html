@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Baby 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #ffd6ec, #ffffff);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.heart {
+    position: fixed;
+    color: #ff8fcf;
+    font-size: 48px;
+    animation: floatUp 6s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+@keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+.decor {
+    position: fixed;
+    font-size: 30px;
+    opacity: 0;
+    pointer-events: none;
+    animation: twinkle 3s ease-in-out infinite;
+    z-index: 0;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(1) rotate(0deg); }
+    50% { opacity: 0.8; transform: scale(1.2) rotate(10deg); }
+}
+.sparkle {
+    position: fixed;
+    font-size: 20px;
+    color: #ffb3d9;
+    animation: twinkle 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+.page {
+    position: absolute;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 1;
+}
+.page.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+h1 {
+    font-family: 'Pacifico', cursive;
+    color: #ff69b4;
+    font-size: 2.2em;
+}
+button {
+    margin-top: 25px;
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    background-color: #ffb3d9;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background-color: #ff69b4;
+    transform: scale(1.08);
+}
+.reply {
+    margin-top: 15px;
+    color: #ff69b4;
+    font-weight: bold;
+}
+.envelope {
+    width: 220px;
+    height: 140px;
+    background: #ffe6f0;
+    margin: 40px auto;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(255,105,180,0.3);
+    cursor: pointer;
+    perspective: 600px;
+    z-index: 2;
+}
+.flap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-bottom: 80px solid #ffcce6;
+    top: -80px;
+    transform-origin: bottom center;
+    transition: transform 0.8s ease;
+}
+.envelope.open .flap {
+    transform: rotateX(-180deg);
+}
+.letter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 60%);
+    width: 90%;
+    max-width: 480px;
+    padding: 20px;
+    background: #fff0f5;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(255,105,180,0.3);
+    max-height: 65vh;
+    overflow-y: auto;
+    font-family: 'Pacifico', cursive;
+    font-size: 1em;
+    line-height: 1.6em;
+    color: #d6336c;
+    border: 2px dashed #ffb3d9;
+    text-align: left;
+    opacity: 0;
+    transition: all 0.8s ease;
+    z-index: 1;
+}
+.envelope.open ~ .letter {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    z-index: 5;
+}
+.letter p {
+    margin-bottom: 1.5em; /* Adds space between paragraphs for separation */
+}
+</style>
+</head>
+<body>
+
+<!-- Decorative Elements -->
+<div class="decor" style="top: 15px; left:15px;">✨🌸</div>
+<div class="decor" style="bottom:15px; right:15px;">🎀✨</div>
+<div class="decor" style="top: 15px; right:15px;">💖</div>
+<div class="decor" style="bottom:15px; left:15px;">🌟</div>
+<div class="sparkle" style="top: 20%; left: 10%;">✨</div>
+<div class="sparkle" style="top: 30%; right: 10%;">✨</div>
+<div class="sparkle" style="bottom: 20%; left: 20%;">✨</div>
+<div class="sparkle" style="bottom: 30%; right: 20%;">✨</div>
+
+<div class="page active" id="page1">
+    <h1>hi baby!</h1>
+    <button onclick="replyHello()">hellooo! 💕</button>
+    <div class="reply" id="reply1"></div>
+    <audio id="bgMusic" controls style="display: none;"></audio>
+</div>
+
+<div class="page" id="page2">
+    <h1>so, i made this cuz i wanna tell u something :p</h1>
+    <button onclick="nextPage(3)">what is it baby?</button>
+</div>
+
+<div class="page" id="page3">
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+        <div class="flap"></div>
+    </div>
+    <div class="letter">
+        <p>Happy Valentine's Day my baby! ><</p>
+
+        <p>I wanted this to be hand written but I can't since you're so far away, that's why I thought this would be a good backup plan:3 Anyway baby, I just wanna tell you how much I appreciate you. Thank you for making me feel loved and appreciated, for making me genuinely happy, for making my days brighter, and for just being the amazing person that you are : ) Thank you for making my life so much better just by being in it and for making life feel a lot easier. I appreciate everything you do for me, even the little things. Thank you for being the person I can come running to whenever things feel heavy, you are my safe place. I'll always be grateful to have you baby and I will forever cherish you. You are the best blessing that I've ever received and no words will ever be able to express how grateful I am to have you. I love you so much baby, I hope I'm making you happy just like how you make me or even happier.</p>
+
+        <p>I want my love for you to be something that you don't have to question. I want you to know that I love you genuinely and that I'll keep on choosing you without a single doubt in mind. You are loved, appreciated, and valued by me baby. I hope you know that you're secured with me, you don't have to keep your defenses up and just let your guard down with me. You're safe here baby, you can trust me fully and not worry about me breaking it. I love you genuinely baby. I'm not here as someone temporary, I'm here to grow with you and that means I'll stay no matter how hard things get. Through our ups and downs, I'll stay with you. No matter how hard it gets, I'll stay and always choose to fix things with you because I want it to be you, I want it to be us. No matter what challenges we have to go through, I want you to know that I'll stay and face it with you. We'll get through it all together.</p>
+
+        <p>You've given me something I never knew I needed — something that made me want to feel alive and be better as a person. Loving you feels easy, something that I naturally do — just like breathing. I don't have to force myself to do it because it just comes naturally without me noticing. I love you more than my video games : D hehe, You're everything I wanted baby. I pray God keeps you safe all the time and protect our relationship. I wanna be with you forever baby, I wanna grow old with you and make a lot of memories together so that we'll have something to look back to when we get older :p Thank you for being my best friend and lover at the same time. No amount of words will ever be enough to fully express how I truly love you baby.</p>
+
+        <p>Also, I'm always proud of you baby : ) I'm proud of you for handling life even when the world is being mean to you. Please know that you're not alone anymore lovey, when things are too much for you to handle and everything feels heavy, let me be there for you baby okay? I know you can handle it alone because you're strong but please let me. You can be vulnerable with me and I'll handle you gently and patiently. Let me be the one to rub your back, wipe your tears, and be your shoulder to cry on. You'll always have me baby and I'm here for you always.</p>
+
+        <p>I LOVE YOU THE MOST MY PRETTY BABY ><</p>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // Floating Hearts Animation - More frequent and bigger
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 4) + 's'; // Random speed
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000); // Remove after animation
+    }
+    setInterval(createHeart, 1000); // Create a new heart every 1 second
+
+    const playlist = [
+        "nothing.mp3",
+        "so-high-school.mp3",
+        "your-universe.mp3",
+        "she-get-the-gold-star.mp3",
+        "balisong.mp3",
+        "youre-here.mp3"
+    ];
+
+    let currentSong = 0;
+    const audio = document.getElementById("bgMusic");
+    audio.volume = 0.5;
+
+    function playSong(index) {
+        if (index >= playlist.length) {
+            currentSong = 0;
+            playSong(currentSong);
+            return;
+        }
+        audio.src = playlist[index];
+        audio.load();
+        audio.play().then(() => {
+            console.log("Playing:", playlist[index]);
+        }).catch(error => {
+            console.error("Playback failed for", playlist[index], ":", error);
+            alert("Song couldn't play: " + playlist[index] + ". Check file path or browser settings. Skipping to next.");
+            currentSong = (currentSong + 1) % playlist.length;
+            playSong(currentSong);
+        });
+    }
+
+    function startPlaylist() {
+        playSong(currentSong);
+    }
+
+    audio.addEventListener("ended", function () {
+        currentSong = (currentSong + 1) % playlist.length;
+        playSong(currentSong);
+    });
+
+    window.replyHello = function () {
+        document.getElementById("reply1").innerText = "hellooo!";
+        startPlaylist();
+        setTimeout(() => nextPage(2), 1000);
+    };
+
+    window.nextPage = function (pageNum) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page' + pageNum).classList.add('active');
+    };
+
+    window.openEnvelope = function () {
+        document.getElementById('envelope').classList.add('open');
+    };
+
+});
+</script>
+
+</body>
+</html>
